@@ -1,4 +1,4 @@
-package org.jcloarca.jcchat;
+package org.jcloarca.jcchat.domain;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.DataSnapshot;
@@ -8,7 +8,6 @@ import com.firebase.client.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Created by JCLoarca on 6/7/2016.
