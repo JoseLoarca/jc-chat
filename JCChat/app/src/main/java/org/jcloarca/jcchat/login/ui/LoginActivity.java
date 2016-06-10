@@ -1,4 +1,4 @@
-package org.jcloarca.jcchat.login;
+package org.jcloarca.jcchat.login.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 
 import org.jcloarca.jcchat.R;
 import org.jcloarca.jcchat.contactlist.ContactListActivity;
+import org.jcloarca.jcchat.login.LoginPresenter;
+import org.jcloarca.jcchat.login.LoginPresenterImpl;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

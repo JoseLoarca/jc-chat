@@ -1,4 +1,4 @@
-package org.jcloarca.jcchat.login;
+package org.jcloarca.jcchat.login.ui;
 
 /**
  * Created by JCLoarca on 6/7/2016.

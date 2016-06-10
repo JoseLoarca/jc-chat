@@ -1,10 +1,9 @@
 package org.jcloarca.jcchat.login;
 
-import android.util.Log;
-
 import org.jcloarca.jcchat.lib.EventBus;
 import org.jcloarca.jcchat.lib.GreenRobotEventBus;
 import org.jcloarca.jcchat.login.events.LoginEvent;
+import org.jcloarca.jcchat.login.ui.LoginView;
 
 
 /**
@@ -85,7 +84,6 @@ public class LoginPresenterImpl implements LoginPresenter {
             loginView.hideProgress();
             loginView.enableInputs();
         }
-        Log.e("LoginPresenterImpl", "onFailedToRecoverSession");
     }
 
     private void onSignInSuccess(){
