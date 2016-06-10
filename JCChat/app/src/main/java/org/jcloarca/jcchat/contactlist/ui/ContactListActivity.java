@@ -1,4 +1,4 @@
-package org.jcloarca.jcchat.contactlist;
+package org.jcloarca.jcchat.contactlist.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

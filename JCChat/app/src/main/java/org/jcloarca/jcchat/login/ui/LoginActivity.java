@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import org.jcloarca.jcchat.R;
-import org.jcloarca.jcchat.contactlist.ContactListActivity;
+import org.jcloarca.jcchat.contactlist.ui.ContactListActivity;
 import org.jcloarca.jcchat.login.LoginPresenter;
 import org.jcloarca.jcchat.login.LoginPresenterImpl;
 
