@@ -6,6 +6,8 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import org.jcloarca.jcchat.entities.User;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,7 +52,7 @@ public class FirebaseHelper {
         Firebase userReference = null;
         if(email!=null){
             String emailKey = email.replace(".","_");
-            userReference = dataReference.getRoot().child(USERS_PATH).child(email);
+            userReference = dataReference.getRoot().child(USERS_PATH).child(emailKey);
         }
         return userReference;
     }
@@ -97,7 +99,7 @@ public class FirebaseHelper {
     }
 
     public void signOff(){
-        notifyContactsOfConnectionChange(false, true);
+        notifyContactsOfConnectionChange(User.OFFLINE, true);
     }
 
     private void notifyContactsOfConnectionChange(final boolean online, final boolean signoff) {
