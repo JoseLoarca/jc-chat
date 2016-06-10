@@ -1,5 +1,6 @@
 package org.jcloarca.jcchat.login;
 
+import org.greenrobot.eventbus.Subscribe;
 import org.jcloarca.jcchat.lib.EventBus;
 import org.jcloarca.jcchat.lib.GreenRobotEventBus;
 import org.jcloarca.jcchat.login.events.LoginEvent;
@@ -59,6 +60,7 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
+    @Subscribe
     public void onEventMainThread(LoginEvent event) {
         switch (event.getEventType()){
             case LoginEvent.onSignInSuccess:
