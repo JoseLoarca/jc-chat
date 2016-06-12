@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import org.jcloarca.jcchat.R;
 import org.jcloarca.jcchat.addcontact.ui.AddContactFragment;
+import org.jcloarca.jcchat.chat.ChatActivity;
 import org.jcloarca.jcchat.contactlist.ContactListPresenter;
 import org.jcloarca.jcchat.contactlist.ContactListPresenterImpl;
 import org.jcloarca.jcchat.contactlist.ui.adapters.ContactListAdapter;
@@ -125,7 +126,10 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
 
     @Override
     public void onItemClick(User user) {
-        Toast.makeText(this, user.getEmail(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.putExtra(ChatActivity.EMAIL_KEY, user.getEmail());
+        intent.putExtra(ChatActivity.ONLINE_KEY, user.isOnline());
+        startActivity(intent);
     }
 
     @Override
