@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import org.jcloarca.jcchat.R;
+import org.jcloarca.jcchat.addcontact.ui.AddContactFragment;
 import org.jcloarca.jcchat.contactlist.ContactListPresenter;
 import org.jcloarca.jcchat.contactlist.ContactListPresenterImpl;
 import org.jcloarca.jcchat.contactlist.ui.adapters.ContactListAdapter;
@@ -104,7 +105,7 @@ public class ContactListActivity extends AppCompatActivity implements ContactLis
 
     @OnClick(R.id.fab)
     public void addContact(){
-
+        new AddContactFragment().show(getSupportFragmentManager(), getString(R.string.addcontact_message_title));
     }
 
     @Override
