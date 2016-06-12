@@ -2,18 +2,16 @@ package org.jcloarca.jcchat.contactlist.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import org.jcloarca.jcchat.R;
 import org.jcloarca.jcchat.addcontact.ui.AddContactFragment;
-import org.jcloarca.jcchat.chat.ChatActivity;
+import org.jcloarca.jcchat.chat.ui.ChatActivity;
 import org.jcloarca.jcchat.contactlist.ContactListPresenter;
 import org.jcloarca.jcchat.contactlist.ContactListPresenterImpl;
 import org.jcloarca.jcchat.contactlist.ui.adapters.ContactListAdapter;
@@ -24,7 +22,6 @@ import org.jcloarca.jcchat.lib.ImageLoader;
 import org.jcloarca.jcchat.login.ui.LoginActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

@@ -1,8 +1,7 @@
-package org.jcloarca.jcchat.chat;
+package org.jcloarca.jcchat.chat.ui;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,13 +12,21 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import org.jcloarca.jcchat.R;
+import org.jcloarca.jcchat.chat.ui.adapters.ChatAdapter;
+import org.jcloarca.jcchat.chat.ChatPresenter;
+import org.jcloarca.jcchat.chat.ChatPresenterImpl;
 import org.jcloarca.jcchat.domain.AvatarHelper;
 import org.jcloarca.jcchat.entities.ChatMessage;
 import org.jcloarca.jcchat.lib.GlideImageLoader;
 import org.jcloarca.jcchat.lib.ImageLoader;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatActivity extends AppCompatActivity implements  ChatView{
@@ -36,8 +43,6 @@ public class ChatActivity extends AppCompatActivity implements  ChatView{
     RecyclerView messageRecyclerView;
     @Bind(R.id.editTxtMessage)
     EditText editTxtMessage;
-    @Bind(R.id.btnSendMessage)
-    ImageButton btnSendMessage;
 
     private ChatAdapter adapter;
     private ChatPresenter presenter;
@@ -60,10 +65,12 @@ public class ChatActivity extends AppCompatActivity implements  ChatView{
     }
 
     private void setupAdapter() {
+        adapter = new ChatAdapter(this, new ArrayList<ChatMessage>());
     }
 
     private void setupRecyclerView() {
         messageRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        messageRecyclerView.setAdapter(adapter);
     }
 
     private void setupToolbar(Intent i) {
@@ -80,6 +87,8 @@ public class ChatActivity extends AppCompatActivity implements  ChatView{
 
         ImageLoader imageLoader = new GlideImageLoader(getApplicationContext());
         imageLoader.load(imgAvatar, AvatarHelper.getAvatarUrl(recipient));
+
+        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -104,5 +113,11 @@ public class ChatActivity extends AppCompatActivity implements  ChatView{
     public void onMessageReceived(ChatMessage msg) {
         adapter.add(msg);
         messageRecyclerView.scrollToPosition(adapter.getItemCount() - 1);
+    }
+
+    @OnClick(R.id.btnSendMessage)
+    public void sendMessage(){
+        presenter.sendMessage(editTxtMessage.getText().toString());
+        editTxtMessage.setText("");
     }
 }

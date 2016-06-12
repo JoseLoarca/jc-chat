@@ -1,4 +1,4 @@
-package org.jcloarca.jcchat.chat;
+package org.jcloarca.jcchat.chat.ui;
 
 import org.jcloarca.jcchat.entities.ChatMessage;
 
