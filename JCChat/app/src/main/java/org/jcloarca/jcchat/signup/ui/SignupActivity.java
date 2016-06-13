@@ -1,9 +1,9 @@
-package org.jcloarca.jcchat.login.ui;
+package org.jcloarca.jcchat.signup.ui;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,19 +14,17 @@ import org.jcloarca.jcchat.R;
 import org.jcloarca.jcchat.contactlist.ui.ContactListActivity;
 import org.jcloarca.jcchat.login.LoginPresenter;
 import org.jcloarca.jcchat.login.LoginPresenterImpl;
-import org.jcloarca.jcchat.signup.ui.SignupActivity;
+import org.jcloarca.jcchat.login.ui.LoginView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginActivity extends AppCompatActivity implements LoginView {
+public class SignupActivity extends AppCompatActivity implements LoginView {
     @Bind(R.id.txtEmail)
     EditText inputEmail;
     @Bind(R.id.txtPassword)
     EditText inputPassword;
-    @Bind(R.id.btnSignin)
-    Button btnSignin;
     @Bind(R.id.btnSignup)
     Button btnSignup;
     @Bind(R.id.progressBar)
@@ -34,15 +32,24 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Bind(R.id.layoutMainContainer)
     RelativeLayout container;
 
-    private LoginPresenter loginPresenter;
+    LoginPresenter loginPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
 
+        setTitle(R.string.signup_title);
+
         loginPresenter = new LoginPresenterImpl(this);
+        loginPresenter.onCreate();
+    }
+
+    @Override
+    protected void onDestroy() {
+        loginPresenter.onDestroy();
+        super.onDestroy();
     }
 
     @Override
@@ -50,19 +57,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         super.onResume();
 
         loginPresenter.onResume();
-        loginPresenter.checkForAuthenticatedUser();
     }
 
     @Override
     protected void onPause() {
         loginPresenter.onPause();
         super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        loginPresenter.onDestroy();
-        super.onDestroy();
     }
 
     @Override
@@ -88,14 +88,13 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @OnClick(R.id.btnSignup)
     @Override
     public void handleSignup() {
-        startActivity(new Intent(this, SignupActivity.class));
+        loginPresenter.registerNewUser(inputEmail.getText().toString(),
+                                        inputPassword.getText().toString());
     }
 
-    @OnClick(R.id.btnSignin)
     @Override
     public void handleSignin() {
-        loginPresenter.validateLogin(inputEmail.getText().toString(),
-                                     inputPassword.getText().toString());
+        throw new UnsupportedOperationException("Operation not valid in signup.");
     }
 
     @Override
@@ -105,25 +104,24 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void loginError(String error) {
-        inputPassword.setText("");
-        String msgError = String.format(getString(R.string.login_error_message_signin), error);
-        inputPassword.setError(msgError);
+        throw new UnsupportedOperationException("Operation not valid in signup.");
     }
 
     @Override
     public void newUserSuccess() {
-        throw new UnsupportedOperationException("Operation not valid in login.");
+        Snackbar.make(container, R.string.login_notice_message_signup, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     public void newUserError(String error) {
-        throw new UnsupportedOperationException("Operation not valid in login.");
+        inputPassword.setText("");
+        String msgError = String.format(getString(R.string.login_error_message_signup), error);
+        inputPassword.setError(msgError);
     }
 
     private void setInputs(boolean enabled) {
         inputEmail.setEnabled(enabled);
         inputPassword.setEnabled(enabled);
-        btnSignin.setEnabled(enabled);
         btnSignup.setEnabled(enabled);
     }
 }
