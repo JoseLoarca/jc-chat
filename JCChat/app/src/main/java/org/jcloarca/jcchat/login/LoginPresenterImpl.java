@@ -23,7 +23,7 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     @Override
     public void onCreate(){
-        
+
     }
 
     @Override

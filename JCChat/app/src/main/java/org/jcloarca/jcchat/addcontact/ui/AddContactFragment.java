@@ -112,7 +112,11 @@ public class AddContactFragment extends DialogFragment implements AddContactView
             positiveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                presenter.addContact(editTxtEmail.getText().toString());
+                    if(editTxtEmail.getText().toString().trim().equals("")){
+                        editTxtEmail.setError("Ingrese un contacto!");
+                    }else{
+                        presenter.addContact(editTxtEmail.getText().toString());
+                    }
                 }
             });
 
